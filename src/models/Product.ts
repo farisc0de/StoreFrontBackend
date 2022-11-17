@@ -37,4 +37,19 @@ export class ProductsStore {
       throw new Error(`${error}`)
     }
   }
+
+    async create(p: Products): Promise<Products[]> {
+    try {
+      const conn = await client.connect()
+      const sql = `INSERT INTO products (name, price, category) VALUES ($1, $2, $3);`
+
+      const res = await conn.query(sql, [p.name, p.price, p.catigory])
+
+      conn.release()
+
+      return res.rows
+    } catch (error) {
+      throw new Error(`${error}`)
+    }
+  }
 }

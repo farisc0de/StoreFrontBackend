@@ -1,14 +1,14 @@
 import express, { Request, Response } from 'express'
 import { ProductsStore } from '../models/Product'
-import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import verifyAuthToken from '../middlewares/verifyToken';
 
 dotenv.config()
 
 const products_routes = (app: express.Application) => {
   app.get('/products', index)
   app.get('/products/:id', show)
-  app.post('/products', create)
+  app.post('/products', verifyAuthToken, create)
 }
 
 const store = new ProductsStore()
@@ -34,18 +34,7 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-    const authorizationHeader = req.headers.authorization
-    const token = authorizationHeader!.split(' ')[1]
-    console.log(token)
-    jwt.verify(token, `${TOKEN_SECRET}`)
-  } catch (err) {
-    res.status(401)
-    res.json('Access denied, invalid token')
-    return
-  }
-
-  try {
-    const result = await store.show(req.params.id)
+    const result = await store.create(req)
     res.json(result)
   } catch (err) {
     throw new Error(`${err}`)

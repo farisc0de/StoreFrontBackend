@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import Order from '../models/Order'
+import { Order, OrderStore } from '../models/Order'
 
 const orders_routes = (app: express.Application) => {
   app.get('/orders', (_req: Request, res: Response) => {
