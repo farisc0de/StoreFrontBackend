@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000
 const app: Application = express()
 
 const corsOptions = {
-  origin: 'www.google.com',
+  origin: process.env.URL,
   optionSuccessStatus: 200
 }
 
@@ -34,7 +34,7 @@ products_routes(app)
 users_routes(app)
 
 app.listen(PORT, () => {
-  console.log(`Server is starting at prot:${PORT}`)
+  console.log(`Server is starting at port:${PORT}`)
 })
 
 client.connect()
