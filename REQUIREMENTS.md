@@ -8,24 +8,28 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Products
 
-- Index
-- Show
-- Create [token required]
+- Index `/products` (GET)
+- Show `/produts/:product_id` (GET)
+- Create [token required] `/produts` (POST)
 - [OPTIONAL] Top 5 most popular products
-- [OPTIONAL] Products by category (args: product category)
+- [OPTIONAL] Products by category (args: product category) `/products/:category_id` (GET)
 
 #### Users
 
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index [token required] `/users` (GET)
+- Show [token required] `/users/:user_id` (GET)
+- Create N[token required] `/users` (POST)
+- Login `/login` (POST)
+- Register `/register` (POST)
 
 #### Orders
 
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required] `/orders/:user_id/active` (GET)
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] `/orders/:user_id/complete` (GET)
 
 ## Data Shapes
+
+![](https://h.top4top.io/p_2514u0a5m1.png)
 
 #### Product
 
@@ -48,3 +52,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+### Categories
+
+- id
+- name

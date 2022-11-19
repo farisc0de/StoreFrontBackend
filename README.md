@@ -55,3 +55,45 @@ Add JWT functionality as shown in the course. Make sure that JWTs are required f
 Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database.
 
 Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+
+## How to use
+
+```
+npm i
+npm run dev
+```
+
+## How to Test
+
+```
+npm run test
+```
+
+## How to connect to the database
+
+Update the dotenv file with required values
+
+```
+DATABASE_HOST=localhost
+DATABASE_USER=
+DATABASE_PASS=
+DATABASE_NAME=
+```
+
+## How to setup encryption
+
+Generate keys from this website
+
+https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
+
+Update the dotenv values with the required values
+
+```
+BCRYPT_PASSWORD=
+SALT_ROUNDS=10
+TOKEN_SECRET=
+```
+
+## Copyright
+
+MIT

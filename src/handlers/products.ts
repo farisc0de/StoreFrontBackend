@@ -8,7 +8,8 @@ dotenv.config()
 
 const products_routes = (app: express.Application) => {
   app.get('/products', index)
-  app.get('/products/:id', show)
+  app.get('/product/:id', show)
+  app.get('/products/:id', showByCategory)
   app.post('/products', verifyAuthToken, create)
 }
 
@@ -27,6 +28,15 @@ const index = async (req: Request, res: Response) => {
 const show = async (req: Request, res: Response) => {
   try {
     const result = await store.show(req.params.id)
+    res.json(result)
+  } catch (err) {
+    throw new Error(`${err}`)
+  }
+}
+
+const showByCategory = async (req: Request, res: Response) => {
+  try {
+    const result = await store.showByCategory(req.params.id)
     res.json(result)
   } catch (err) {
     throw new Error(`${err}`)
