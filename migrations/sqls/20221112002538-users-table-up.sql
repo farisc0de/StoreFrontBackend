@@ -1,8 +1,8 @@
 CREATE TABLE users (
-    id serial NOT NULL,
-    firstName varchar(255) NOT NULL,
-    lastName varchar(255) NOT NULL,
+    id serial,
+    firstName varchar(255),
+    lastName varchar(255),
     username VARCHAR(100),
-    password varchar(255) NOT NULL,
+    password varchar(255),
     PRIMARY KEY(id)
 );

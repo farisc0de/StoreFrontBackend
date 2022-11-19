@@ -1,60 +1,49 @@
 import express, { Request, Response } from 'express'
+import verifyAuthToken from '../middlewares/verifyToken'
 import { Order, OrderStore } from '../models/Order'
 
 const orders_routes = (app: express.Application) => {
-  app.get('/orders', (_req: Request, res: Response) => {
-    try {
-      res.send('this is the INDEX route')
-    } catch (err) {
-      res.status(400)
-      res.json(err)
-    }
-  })
-
-  app.get('/orders/:id', (_req: Request, res: Response) => {
-    try {
-      res.send('this is the SHOW route')
-    } catch (err) {
-      res.status(400)
-      res.json(err)
-    }
-  })
-
-  app.post('/orders', (req: Request, res: Response) => {
-    const order: Order = {
-      name: req.body.title,
-      content: req.body.content
-    }
-    try {
-      res.send('this is the CREATE route')
-    } catch (err) {
-      res.status(400)
-      res.json(err)
-    }
-  })
-
-  app.put('/orders/:id', (req: Request, res: Response) => {
-    const order: Order = {
-      id: req.params.id,
-      name: req.body.title,
-      content: req.body.content
-    }
-    try {
-      res.send('this is the EDIT route')
-    } catch (err) {
-      res.status(400)
-      res.json(err)
-    }
-  })
-
-  app.delete('/orders/:id', (_req: Request, res: Response) => {
-    try {
-      res.send('this is the DELETE route')
-    } catch (err) {
-      res.status(400)
-      res.json(err)
-    }
-  })
+  app.get('/orders/:id/active', verifyAuthToken, showActive)
+  app.get('/orders/:id/completed', verifyAuthToken, showCompleted)
+  app.post('/orders', verifyAuthToken, create)
 }
 
+const store = new OrderStore()
+
+const showActive = async (req: Request, res: Response) => {
+  try {
+    res.status(200)
+    res.json(await store.getCurrentOrder(req.params.id))
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+}
+
+const showCompleted = async (req: Request, res: Response) => {
+  try {
+    res.status(200)
+    res.json(await store.getCompletedOrder(req.params.id))
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+}
+
+const create = async (req: Request, res: Response) => {
+  const order: Order = {
+    prod_id: req.body.prod_id,
+    user_id: req.body.user_id,
+    quantity: req.body.quantity,
+    status: 'active'
+  }
+
+  try {
+    res.status(200)
+    res.json(await store.createOrder(order))
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+}
 export default orders_routes

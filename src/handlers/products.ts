@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express'
-import { ProductsStore } from '../models/Product'
+import { ProductsStore, Product } from '../models/Product'
 import dotenv from 'dotenv'
-import verifyAuthToken from '../middlewares/verifyToken';
+import jwt from 'jsonwebtoken'
+import verifyAuthToken from '../middlewares/verifyToken'
 
 dotenv.config()
 
@@ -34,7 +35,12 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-    const result = await store.create(req)
+    const product: Product = {
+      name: req.body.name,
+      price: parseInt(req.body.price),
+      category: req.body.category
+    }
+    const result = await store.create(product)
     res.json(result)
   } catch (err) {
     throw new Error(`${err}`)

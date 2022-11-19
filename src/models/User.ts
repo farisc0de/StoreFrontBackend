@@ -5,25 +5,43 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export type User = {
-  id: number
   firstname: string
   lastname: string
   username: string
   password: string
 }
 
+const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env
+
 export class UserStore {
-  async create(u: User): Promise<User> {
-    const pepper = process.env.BCRYPT_PASSWORD
-    const saltRounds = process.env.SALT_ROUNDS ?? '10'
+  async index(): Promise<User[]> {
     try {
-      // @ts-ignore
       const conn = await client.connect()
-      const sql = 'INSERT INTO users (username, password) VALUES($1, $2) RETURNING *'
+      const sql = 'SELECT * FROM users;'
+
+      const res = await conn.query(sql)
+
+      conn.release()
+
+      return res.rows
+    } catch (error) {
+      throw new Error(`${error}`)
+    }
+  }
+
+  async create(u: User): Promise<User> {
+    const pepper = BCRYPT_PASSWORD
+    const saltRounds = SALT_ROUNDS ?? '10'
+    try {
+      const conn = await client.connect()
+      const sql = `INSERT INTO
+         users(firstname, lastname, username, password)
+         VALUES
+         ($1, $2, $3, $4) RETURNING *`
 
       const hash = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds))
 
-      const result = await conn.query(sql, [u.username, hash])
+      const result = await conn.query(sql, [u.firstname, u.lastname, u.username, hash])
       const user = result.rows[0]
 
       conn.release()
@@ -35,16 +53,14 @@ export class UserStore {
   }
 
   async authenticate(username: string, password: string): Promise<User | null> {
-    const pepper = process.env.BCRYPT_PASSWORD
+    const pepper = BCRYPT_PASSWORD
     const conn = await client.connect()
-    const sql = 'SELECT password_digest FROM users WHERE username=($1)'
+    const sql = 'SELECT password FROM users WHERE username=($1)'
 
     const result = await conn.query(sql, [username])
 
     if (result.rows.length) {
       const user = result.rows[0]
-
-      console.log(user)
 
       if (bcrypt.compareSync(password + pepper, user.password)) {
         return user
@@ -52,5 +68,19 @@ export class UserStore {
     }
 
     return null
+  }
+
+  async show(user_id: string): Promise<User | null> {
+    try {
+      const conn = await client.connect()
+      const sql = 'SELECT * FROM users WHERE id = ($1)'
+      const result = await conn.query(sql, [user_id])
+
+      conn.release()
+
+      return result.rows[0]
+    } catch (error) {
+      return null
+    }
   }
 }
