@@ -30,13 +30,21 @@ describe('Test users endpoints response', () => {
     expect(response.status).toBe(200)
   })
 
-  it('test POST /user/:id endpoint', async () => {
-    const response = await request.post('/register').send({
-      firstname: 'Faris',
-      lastname: 'AL-Otaibi',
-      username: 'faris',
-      password: 'faris'
-    })
+  it('test POST /users/create endpoint', async () => {
+    const response = await request
+      .post('/users/create')
+      .set('Authorization', 'bearer ' + dummy_token)
+      .send({
+        firstname: 'Faris',
+        lastname: 'AL-Otaibi',
+        username: 'faris',
+        password: 'faris'
+      })
+    expect(response.status).toBe(200)
+  })
+
+  it('test GET /user/:id endpoint', async () => {
+    const response = await request.get('/user/1').set('Authorization', 'bearer ' + dummy_token)
     expect(response.status).toBe(200)
   })
 })

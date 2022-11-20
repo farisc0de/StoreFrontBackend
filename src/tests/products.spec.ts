@@ -30,7 +30,7 @@ describe('Test products endpoints response', () => {
   })
 
   it('Test GET /products/:id endpoint', async () => {
-    const response = await request.get('/product/1')
+    const response = await request.get('/products/1')
     expect(response.status).toBe(200)
   })
 })
