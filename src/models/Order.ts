@@ -1,7 +1,7 @@
 import client from '../database'
 
 export type Order = {
-  prod_id: number
+  prod_id: string
   quantity: number
   user_id: number
   status: string
@@ -49,7 +49,9 @@ export class OrderStore {
 
       conn.release()
 
-      return order
+      if (order) {
+        return true
+      }
     } catch (err) {
       throw new Error(`unable create order`)
     }

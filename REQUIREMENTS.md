@@ -33,27 +33,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Product
 
-- id
-- name
-- price
-- [OPTIONAL] category
+- id: number
+- name: string
+- price: number
+- [OPTIONAL] category: number
 
 #### User
 
-- id
-- firstName
-- lastName
-- password
+- id: number
+- firstName: string
+- lastName: string
+- password: string
 
 #### Orders
 
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id: number
+- id of each product in the order: string
+- quantity of each product in the order: string
+- user_id: number
+- status of order (active or complete): string
 
 ### Categories
 
-- id
-- name
+- id: number
+- name: string
