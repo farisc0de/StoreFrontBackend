@@ -23,15 +23,15 @@ app.use(morgan('short'))
 app.use(cors(corsOptions))
 app.use(bodyparser.json())
 
+orders_routes(app)
+products_routes(app)
+users_routes(app)
+
 app.get('/', (req: Request, res: Response) => {
   res.json({
     message: 'Hello World 🌍'
   })
 })
-
-orders_routes(app)
-products_routes(app)
-users_routes(app)
 
 app.listen(PORT, () => {
   console.log(`Server is starting at port:${PORT}`)

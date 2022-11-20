@@ -7,11 +7,11 @@ import verifyAuthToken from '../middlewares/verifyToken'
 dotenv.config()
 
 const users_routes = (app: express.Application) => {
-  app.get('/users', verifyAuthToken, index)
-  app.get('/users/:id', verifyAuthToken, show)
-  app.get('/users/create', verifyAuthToken, create)
   app.post('/login', authenticate)
   app.post('/register', register)
+  app.get('/users', verifyAuthToken, index)
+  app.get('/user/:id', verifyAuthToken, show)
+  app.post('/users/create', verifyAuthToken, create)
 }
 
 const store = new UserStore()

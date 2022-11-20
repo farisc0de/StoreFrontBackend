@@ -3,8 +3,8 @@ import verifyAuthToken from '../middlewares/verifyToken'
 import { Order, OrderStore } from '../models/Order'
 
 const orders_routes = (app: express.Application) => {
-  app.get('/orders/:id/active', verifyAuthToken, showActive)
-  app.get('/orders/:id/completed', verifyAuthToken, showCompleted)
+  app.get('/orders/:user_id/active', verifyAuthToken, showActive)
+  app.get('/orders/:user_id/completed', verifyAuthToken, showCompleted)
   app.post('/orders', verifyAuthToken, create)
 }
 
@@ -13,7 +13,7 @@ const store = new OrderStore()
 const showActive = async (req: Request, res: Response) => {
   try {
     res.status(200)
-    res.json(await store.getCurrentOrder(req.params.id))
+    res.json(await store.getCurrentOrder(req.params.user_id))
   } catch (err) {
     res.status(400)
     res.json(err)
@@ -23,7 +23,7 @@ const showActive = async (req: Request, res: Response) => {
 const showCompleted = async (req: Request, res: Response) => {
   try {
     res.status(200)
-    res.json(await store.getCompletedOrder(req.params.id))
+    res.json(await store.getCompletedOrder(req.params.user_id))
   } catch (err) {
     res.status(400)
     res.json(err)

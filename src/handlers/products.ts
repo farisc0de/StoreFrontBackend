@@ -14,7 +14,6 @@ const products_routes = (app: express.Application) => {
 }
 
 const store = new ProductsStore()
-const { TOKEN_SECRET } = process.env
 
 const index = async (req: Request, res: Response) => {
   try {

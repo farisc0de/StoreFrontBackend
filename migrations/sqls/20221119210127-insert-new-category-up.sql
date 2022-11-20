@@ -1,1 +1,1 @@
-/* Replace with your SQL commands */
+INSERT INTO categories (name) VALUES ('car');
