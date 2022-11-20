@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express'
 import { ProductsStore, Product } from '../models/Product'
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
 import verifyAuthToken from '../middlewares/verifyToken'
 
 dotenv.config()

@@ -11,7 +11,7 @@ describe('Test Order Model', () => {
       status: 'active'
     }
     const result = await store.createOrder(order)
-    expect(result).toBe(true)
+    expect(result.user_id).toBe(1)
   })
 
   it('Test get active action', async () => {
