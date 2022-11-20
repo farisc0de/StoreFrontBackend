@@ -1,10 +1,11 @@
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import supertest from 'supertest'
 import app from '../index'
 
 const request = supertest(app)
 
 const dummy_token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiJDJiJDEwJDBmdDVrTFBNNmxua0hneHdYbnNtZi5nTlVFOHRhc1A0UUxNWkNZYzgyeS4wOVlEN2lKQzNtIn0sImlhdCI6MTY2ODk3MDMyOX0.6MNMmHabT7R71srarlkayui1y0vRucPWKdX1ynJOdcs'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2OCwiZmlyc3RuYW1lIjoiRmFyaXMiLCJsYXN0bmFtZSI6IkFMLU90YWliaSIsInVzZXJuYW1lIjoiZmFyaXMiLCJwYXNzd29yZCI6IiQyYiQxMCRkb04wMmxwbnZvLlBpb2RvcVVQWGcuckQyUTE5TVlGZVQ2dXEud09wOVIyZHBSZjlUd0tBaSJ9LCJpYXQiOjE2Njg5NzU3MDZ9.iqekfSdP-YzKMjSiLcGCZhqhn7LABEkMrgEpFXn6JYU'
 
 describe('Test endpoint response', () => {
   it('test hello world endpoint', async () => {
@@ -83,12 +84,20 @@ describe('Test users endpoints response', () => {
   })
 
   it('test POST /user/:id endpoint', async () => {
-    const response = await request.post('/register').send({
-      firstname: 'Faris',
-      lastname: 'AL-Otaibi',
-      username: 'faris',
-      password: 'faris'
-    })
+    const response = await request
+      .post('/register')
+      .set('Authorization', 'bearer ' + dummy_token)
+      .send({
+        firstname: 'Faris',
+        lastname: 'AL-Otaibi',
+        username: 'faris',
+        password: 'faris'
+      })
+    expect(response.status).toBe(200)
+  })
+
+  it('test GET /user endpoint', async () => {
+    const response = await request.get('/user').set('Authorization', 'bearer ' + dummy_token)
     expect(response.status).toBe(200)
   })
 })

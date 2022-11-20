@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { json, Request, Response } from 'express'
 import { User, UserStore } from '../models/User'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -10,7 +10,7 @@ const users_routes = (app: express.Application) => {
   app.post('/login', authenticate)
   app.post('/register', register)
   app.get('/users', verifyAuthToken, index)
-  app.get('/user/:id', verifyAuthToken, show)
+  app.get('/user', verifyAuthToken, show)
   app.post('/users/create', verifyAuthToken, create)
 }
 
@@ -65,7 +65,10 @@ const register = async (req: Request, res: Response) => {
 
 const show = async (req: Request, res: Response) => {
   try {
-    const u = await store.show(req.params.id)
+    const authorizationHeader = req.headers.authorization
+    const token = authorizationHeader!.split(' ')[1]
+    const user = jwt.decode(token, { json: true })
+    const u = await store.show(user?.user.id)
     res.status(200)
     res.json(u)
   } catch (err) {

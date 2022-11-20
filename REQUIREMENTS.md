@@ -9,7 +9,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 
 - Index `/products` (GET)
-- Show `/produts/:product_id` (GET)
+- Show `/produt/:id` (GET)
 - Create [token required] `/produts` (POST)
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category) `/products/:category_id` (GET)
@@ -17,7 +17,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Users
 
 - Index [token required] `/users` (GET)
-- Show [token required] `/users/:user_id` (GET)
+- Show [token required] `/user` (GET)
 - Create N[token required] `/users` (POST)
 - Login `/login` (POST)
 - Register `/register` (POST)
@@ -25,7 +25,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 
 - Current Order by user (args: user id)[token required] `/orders/:user_id/active` (GET)
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] `/orders/:user_id/complete` (GET)
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] `/orders/:user_id/completed` (GET)
 
 ## Data Shapes
 
