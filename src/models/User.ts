@@ -42,9 +42,10 @@ export class UserStore {
       const hash = bcrypt.hashSync(u.password + pepper, parseInt(saltRounds))
 
       const result = await conn.query(sql, [u.firstname, u.lastname, u.username, hash])
-      const user = result.rows[0]
 
       conn.release()
+
+      const user = result.rows[0]
 
       return user
     } catch (err) {

@@ -1,4 +1,3 @@
-import jwt, { JwtPayload } from 'jsonwebtoken'
 import supertest from 'supertest'
 import app from '../index'
 
