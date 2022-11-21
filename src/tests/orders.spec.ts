@@ -1,24 +1,27 @@
-import supertest from 'supertest'
-import app from '../index'
+import { OrderStore, Order } from '../models/Order'
 
-const request = supertest(app)
+const store = new OrderStore()
 
-const dummy_token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJGYXJpcyIsImxhc3RuYW1lIjoiQUwtT3RhaWJpIiwidXNlcm5hbWUiOiJmYXJpcyIsInBhc3N3b3JkIjoiJDJiJDEwJFcuL1dzOEFUOE94Ny54VmlDdk5HWXVnaGRRbTB4aGhCZDZzVEx6U0x3Mm1OZXdWSDJEb2QuIn0sImlhdCI6MTY2ODkyNjAzOX0.xzImXW-3Ug5Qn2ClbYKoaogahoBGaEkHi_Blk6qyIq4'
-
-describe('Test orders endpoints response', () => {
-  it('Test /orders/:id/active endpoint', async () => {
-    const response = await request
-      .get('/orders/1/active')
-      .set('Authorization', 'bearer ' + dummy_token)
-    expect(response.status).toBe(200)
+describe('Test Order Model', () => {
+  it('Test create action', async () => {
+    const order: Order = {
+      prod_id: '1, 2, 3, 4',
+      user_id: 1,
+      quantity: 50,
+      status: 'active'
+    }
+    const result = await store.createOrder(order)
+    expect(result.user_id).toBe(1)
   })
 
-  it('Test GET /orders/:id/completed endpoint', async () => {
-    const response = await request
-      .get('/orders/1/completed')
-      .set('Authorization', 'bearer ' + dummy_token)
-    expect(response.status).toBe(200)
+  it('Test get active action', async () => {
+    const result = await store.getCurrentOrder('1')
+    expect(result.user_id).toBe(1)
+  })
+
+  it('Test get completed action', async () => {
+    const result = await store.getCompletedOrder('1')
+    expect(result.user_id).toBe(1)
   })
 
   it('Test POST /orders endpoint', async () => {

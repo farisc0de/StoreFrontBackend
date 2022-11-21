@@ -56,10 +56,15 @@ Before submitting, make sure that your project is complete with a `README.md`. Y
 
 Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
 
-## How to use
+## How to install
 
 ```
-npm i
+npm install
+```
+
+## How to run
+
+```
 npm run dev
 ```
 
@@ -93,6 +98,101 @@ BCRYPT_PASSWORD=
 SALT_ROUNDS=10
 TOKEN_SECRET=
 ```
+
+## How to migrate database
+
+```
+npm install -g db-migrate
+```
+
+Then
+
+```
+db-migrate up
+```
+
+## Environment variables
+
+```
+PORT=3000
+URL=
+
+DATABASE_HOST=localhost
+DATABASE_USER=
+DATABASE_PASS=
+DATABASE_NAME=
+
+BCRYPT_PASSWORD=
+SALT_ROUNDS=10
+
+TOKEN_SECRET=
+```
+
+## Default Username and Password
+
+Username: faris
+Password: faris
+
+## Routes
+
+Users
+
+```
+(POST) /users
+(GET) /user/:id
+(GET) /users
+(POST) /login
+(POST) /register
+```
+
+Orders
+
+```
+(GET) /users/:user_id/completed
+(GET) /orders/:user_id/active
+(POST) /orders
+```
+
+Products
+
+```
+(POST) /users
+(GET) /user/:id
+(GET) /users
+(POST) /login
+(POST) /register
+```
+
+## Data Shapes
+
+![](https://h.top4top.io/p_2514u0a5m1.png)
+
+#### Product
+
+- id: number
+- name: string
+- price: number
+- [OPTIONAL] category: number
+
+#### User
+
+- id: number
+- firstName: string
+- lastName: string
+- password: string
+
+#### Orders
+
+- id: number
+- id of each product in the order: string
+- quantity of each product in the order: string
+- user_id: number
+- status of order (active or complete): string
+
+### Categories
+
+- id: number
+- name: string
 
 ## Copyright
 

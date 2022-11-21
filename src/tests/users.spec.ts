@@ -1,50 +1,31 @@
-import supertest from 'supertest'
-import app from '../index'
+import { UserStore, User } from '../models/User'
 
-const request = supertest(app)
+const store = new UserStore()
 
-const dummy_token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmaXJzdG5hbWUiOiJGYXJpcyIsImxhc3RuYW1lIjoiQUwtT3RhaWJpIiwidXNlcm5hbWUiOiJmYXJpcyIsInBhc3N3b3JkIjoiJDJiJDEwJFcuL1dzOEFUOE94Ny54VmlDdk5HWXVnaGRRbTB4aGhCZDZzVEx6U0x3Mm1OZXdWSDJEb2QuIn0sImlhdCI6MTY2ODkyNjAzOX0.xzImXW-3Ug5Qn2ClbYKoaogahoBGaEkHi_Blk6qyIq4'
-
-describe('Test users endpoints response', () => {
-  it('test GET /users endpoint', async () => {
-    const response = await request.get('/users').set('Authorization', 'bearer ' + dummy_token)
-    expect(response.status).toBe(200)
+describe('Test Product Model', () => {
+  it('Test show product action', async () => {
+    const result = await store.show('1')
+    expect(result?.firstname).toBe('faris')
   })
 
-  it('test POST /login endpoint', async () => {
-    const response = await request.post('/login').send({
-      username: 'faris',
-      password: 'faris'
-    })
-    expect(response.status).toBe(200)
+  it('Test index action', async () => {
+    const result = await store.index()
+    expect(result[0].firstname).toBe('faris')
   })
 
-  it('test POST /register endpoint', async () => {
-    const response = await request.post('/register').send({
-      firstname: 'Faris',
-      lastname: 'AL-Otaibi',
-      username: 'faris',
-      password: 'faris'
-    })
-    expect(response.status).toBe(200)
+  it('Test create action', async () => {
+    const u: User = {
+      firstname: 'ali',
+      lastname: 'ali',
+      username: 'ali',
+      password: 'ali'
+    }
+    const result = await store.create(u)
+    expect(result.username).toBe('ali')
   })
 
-  it('test POST /users/create endpoint', async () => {
-    const response = await request
-      .post('/users/create')
-      .set('Authorization', 'bearer ' + dummy_token)
-      .send({
-        firstname: 'Faris',
-        lastname: 'AL-Otaibi',
-        username: 'faris',
-        password: 'faris'
-      })
-    expect(response.status).toBe(200)
-  })
-
-  it('test GET /user/:id endpoint', async () => {
-    const response = await request.get('/user/1').set('Authorization', 'bearer ' + dummy_token)
-    expect(response.status).toBe(200)
+  it('Test authenticate action', async () => {
+    const result = await store.authenticate('faris', 'faris')
+    expect(result?.username).toBe('faris')
   })
 })
