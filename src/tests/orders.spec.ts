@@ -23,16 +23,4 @@ describe('Test Order Model', () => {
     const result = await store.getCompletedOrder('1')
     expect(result.user_id).toBe(1)
   })
-
-  it('Test POST /orders endpoint', async () => {
-    const response = await request
-      .post('/orders')
-      .set('Authorization', 'bearer ' + dummy_token)
-      .send({
-        user_id: 1,
-        prod_id: '1, 2, 3,4',
-        quantity: 5
-      })
-    expect(response.status).toBe(200)
-  })
 })
