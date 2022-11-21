@@ -5,7 +5,7 @@ dotenv.config()
 
 const { DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME, ENV } = process.env
 
-let client
+let client: Pool = new Pool()
 
 if (ENV === 'test') {
   client = new Pool({

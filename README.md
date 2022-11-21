@@ -70,6 +70,14 @@ npm run dev
 
 ## How to Test
 
+First set the enviorment to test in the `.env`
+
+```
+ENV=test
+```
+
+Then run the tests
+
 ```
 npm run test
 ```
@@ -116,6 +124,7 @@ db-migrate up
 ```
 PORT=3000
 URL=
+ENV=
 
 DATABASE_HOST=localhost
 DATABASE_USER=
@@ -140,7 +149,7 @@ Users
 ```
 (POST) /users
 (GET) /user/:id
-(GET) /users
+(GET) /user
 (POST) /login
 (POST) /register
 ```
@@ -156,11 +165,10 @@ Orders
 Products
 
 ```
-(POST) /users
-(GET) /user/:id
-(GET) /users
-(POST) /login
-(POST) /register
+(POST) /products
+(GET) /products
+(GET) /product/:id
+(GET) /products/:id
 ```
 
 ## Data Shapes
