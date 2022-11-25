@@ -23,6 +23,7 @@ const index = async (req: Request, res: Response) => {
     const result = await store.index()
     res.json(result)
   } catch (err) {
+    res.status(400)
     throw new Error(`${err}`)
   }
 }

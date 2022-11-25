@@ -27,9 +27,13 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Current Order by user (args: user id)[token required] `/orders/:user_id/active` (GET)
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] `/orders/:user_id/completed` (GET)
 
-## Data Shapes
+## Database ER Digram
 
 ![](https://h.top4top.io/p_2514u0a5m1.png)
+
+## Database Scheme
+
+![](https://h.top4top.io/p_2520urg641.png)
 
 #### Product
 
@@ -48,7 +52,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 
 - id: number
-- id of each product in the order: string
+- id of each product in the order
 - quantity of each product in the order: string
 - user_id: number
 - status of order (active or complete): string

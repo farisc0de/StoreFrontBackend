@@ -1,7 +1,7 @@
 import client from '../database'
+import { Product } from './Product'
 
 export type Order = {
-  prod_id: string
   quantity: number
   user_id: number
   status: string
@@ -40,11 +40,11 @@ export class OrderStore {
     try {
       const conn = await client.connect()
       const sql = `INSERT INTO
-         orders (prod_id, quantity, user_id, status)
+         orders (quantity, user_id, status)
          VALUES
-         ($1, $2, $3, $4) RETURNING *`
+         ($1, $2, $3) RETURNING *`
 
-      const result = await conn.query(sql, [o.prod_id, o.quantity, o.user_id, o.status])
+      const result = await conn.query(sql, [o.quantity, o.user_id, o.status])
 
       conn.release()
 
@@ -53,6 +53,20 @@ export class OrderStore {
       return order
     } catch (err) {
       throw new Error(`unable create order`)
+    }
+  }
+
+  async addProductToOrder(p: number, o: number): Promise<boolean> {
+    try {
+      const conn = await client.connect()
+      const sql = `INSERT INTO ordersproduct`
+      const result = await conn.query(sql, [p, o])
+
+      conn.release()
+
+      return true
+    } catch (error) {
+      throw new Error(`unable to add product to order`)
     }
   }
 }

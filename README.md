@@ -93,6 +93,8 @@ DATABASE_PASS=
 DATABASE_NAME=
 ```
 
+I am using the port: 5432
+
 ## How to setup encryption
 
 Generate keys from this website
@@ -117,6 +119,77 @@ Then
 
 ```
 db-migrate up
+```
+
+Or you can execute these SQL commands in your psql terminal
+
+### Create Users table
+
+```sql
+CREATE TABLE users (
+    id serial,
+    firstName varchar(255),
+    lastName varchar(255),
+    username VARCHAR(100),
+    password varchar(255),
+    PRIMARY KEY(id)
+);
+```
+
+### Create products table
+
+```sql
+CREATE TABLE products (
+    id serial,
+    name varchar(255),
+    price varchar(255),
+    category int,
+    PRIMARY KEY(id)
+);
+```
+
+### Create orders table
+
+```sql
+CREATE TABLE orders (
+    id serial,
+    user_id int,
+    status varchar(255),
+    PRIMARY KEY(id)
+);
+```
+
+### Create categories table
+
+```sql
+CREATE TABLE categories (
+    id serial,
+    name varchar(255),
+    PRIMARY KEY(id)
+);
+```
+
+### Create orders products table
+
+```sql
+CREATE TABLE ordersproduct (
+    id serial,
+    order_id int not null REFERENCES orders (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    product_id int not null REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT order_product_key PRIMARY KEY (order_id, product_id)
+);
+```
+
+### Create your first user
+
+```sql
+INSERT INTO users (firstName, lastName, username, password) VALUES (
+    'faris',
+    'mohammed',
+    'admin',
+    '$2a$12$9g5Z7JTppRhzVPZI3NzDAeF4CJD42rO/gz9CmBjuUmADFmN0X.dMe'
+);
+
 ```
 
 ## Environment variables

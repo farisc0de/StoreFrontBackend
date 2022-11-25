@@ -6,6 +6,7 @@ const orders_routes = (app: express.Application) => {
   app.get('/orders/:user_id/active', verifyAuthToken, showActive)
   app.get('/orders/:user_id/completed', verifyAuthToken, showCompleted)
   app.post('/orders', verifyAuthToken, create)
+  app.post('/order/:user_id', verifyAuthToken, addProductToOrder)
 }
 
 const store = new OrderStore()
@@ -32,7 +33,6 @@ const showCompleted = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const order: Order = {
-    prod_id: req.body.prod_id,
     user_id: req.body.user_id,
     quantity: req.body.quantity,
     status: 'active'
@@ -46,4 +46,6 @@ const create = async (req: Request, res: Response) => {
     res.json(err)
   }
 }
+
+const addProductToOrder = async (req: Request, res: Response) => {}
 export default orders_routes
