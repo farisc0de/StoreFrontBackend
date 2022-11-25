@@ -246,7 +246,11 @@ Products
 
 ## Data Shapes
 
-![](https://h.top4top.io/p_2514u0a5m1.png)
+![](https://o.top4top.io/p_2514u0a5m1.png)
+
+## Database Scheme
+
+![](https://o.top4top.io/p_2520urg641.png)
 
 #### Product
 
