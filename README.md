@@ -212,8 +212,8 @@ TOKEN_SECRET=
 
 ## Default Username and Password
 
-Username: faris
-Password: faris
+- Username: faris
+- Password: faris
 
 ## Routes
 

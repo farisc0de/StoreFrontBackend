@@ -47,5 +47,9 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
-const addProductToOrder = async (req: Request, res: Response) => {}
+const addProductToOrder = async (req: Request, res: Response) => {
+  const order: OrdersProduct = {
+    user_id: req.body.user_id,
+  }
+}
 export default orders_routes
