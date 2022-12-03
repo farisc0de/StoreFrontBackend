@@ -1,0 +1,1 @@
+INSERT INTO orderproducts (order_id, product_id) VALUES (1, 1);

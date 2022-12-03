@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import verifyAuthToken from '../middlewares/verifyToken'
 import { Order, OrderStore } from '../models/Order'
+import { OrderProductStore } from '../models/OrderProducts'
 
 const orders_routes = (app: express.Application) => {
   app.get('/orders/:user_id/active', verifyAuthToken, showActive)
@@ -48,8 +49,14 @@ const create = async (req: Request, res: Response) => {
 }
 
 const addProductToOrder = async (req: Request, res: Response) => {
-  const order: OrdersProduct = {
-    user_id: req.body.user_id,
+  const order: OrderProductStore = {
+    order_id: req.body.order_id,
+    product_id: req.body.product_id
   }
+
+  try {
+    res.status(200)
+    res.json(await store.addProductToOrder(order))
+  } catch (error) {}
 }
 export default orders_routes

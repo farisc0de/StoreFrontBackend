@@ -1,4 +1,5 @@
 import client from '../database'
+import { OrderProductStore, OrderProducts } from './OrderProducts'
 import { Product } from './Product'
 
 export type Order = {
@@ -56,15 +57,10 @@ export class OrderStore {
     }
   }
 
-  async addProductToOrder(p: number, o: number): Promise<boolean> {
+  async addProductToOrder(order: OrderProductStore): Promise<OrderProductStore> {
     try {
-      const conn = await client.connect()
-      const sql = `INSERT INTO ordersproduct`
-      const result = await conn.query(sql, [p, o])
-
-      conn.release()
-
-      return true
+      const o = new OrderProducts()
+      return o.addProductToOrder(order)
     } catch (error) {
       throw new Error(`unable to add product to order`)
     }

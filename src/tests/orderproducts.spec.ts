@@ -22,4 +22,12 @@ describe('Test Order Model', () => {
     const result = await store.getCompletedOrder('1')
     expect(result.user_id).toBe(1)
   })
+
+  it('Test Adding a product to an active order', async () => {
+    const result = await store.addProductToOrder({
+      order_id: 1,
+      product_id: 1
+    })
+    expect(result.order_id).toBe(1)
+  })
 })

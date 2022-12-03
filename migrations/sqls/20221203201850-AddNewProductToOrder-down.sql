@@ -1,0 +1,1 @@
+DELETE FROM orderproducts WHERE id = 1;

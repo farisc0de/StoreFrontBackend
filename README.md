@@ -121,6 +121,27 @@ Then
 db-migrate up
 ```
 
+If you want to go this way please update database.json
+
+```
+{
+    "dev": {
+        "driver": "pg",
+        "host": "127.0.0.1",
+        "database": "storefront",
+        "user": "postgres",
+        "password": "farisksa1997"
+    },
+    "test": {
+        "driver": "pg",
+        "host": "127.0.0.1",
+        "database": "storefront",
+        "user": "postgres",
+        "password": "farisksa1997"
+    }
+}
+```
+
 Or you can execute these SQL commands in your psql terminal
 
 ### Create Users table
@@ -242,6 +263,14 @@ Products
 (GET) /products
 (GET) /product/:id
 (GET) /products/:id
+```
+
+OrdersProduct
+
+```
+(POST) /orderproducts
+(DELETE) /orderproducts
+(GET) /orderproducts/:order_id
 ```
 
 ## Data Shapes
