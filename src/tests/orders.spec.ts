@@ -6,7 +6,6 @@ describe('Test Order Model', () => {
   it('Test create action', async () => {
     const order: Order = {
       user_id: 1,
-      quantity: 50,
       status: 'active'
     }
     const result = await store.createOrder(order)

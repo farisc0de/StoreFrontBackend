@@ -35,7 +35,6 @@ const showCompleted = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   const order: Order = {
     user_id: req.body.user_id,
-    quantity: req.body.quantity,
     status: 'active'
   }
 
@@ -57,6 +56,9 @@ const addProductToOrder = async (req: Request, res: Response) => {
   try {
     res.status(200)
     res.json(await store.addProductToOrder(order))
-  } catch (error) {}
+  } catch (error) {
+    res.status(400)
+    res.json(error)
+  }
 }
 export default orders_routes

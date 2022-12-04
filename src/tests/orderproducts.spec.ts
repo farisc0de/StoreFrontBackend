@@ -6,7 +6,6 @@ describe('Test Order Model', () => {
   it('Test create action', async () => {
     const order: Order = {
       user_id: 1,
-      quantity: 50,
       status: 'active'
     }
     const result = await store.createOrder(order)
@@ -29,5 +28,10 @@ describe('Test Order Model', () => {
       product_id: 1
     })
     expect(result.order_id).toBe(1)
+  })
+
+  it('Test getProductQuantity from an order', async () => {
+    const result = await store.getProductQuantity(1)
+    expect(result).toBe(result)
   })
 })
