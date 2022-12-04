@@ -26,12 +26,7 @@ export class OrderProducts {
       const sql = 'SELECT * FROM orderproducts WHERE order_id = $1'
       const result = await conn.query(sql, [order_id])
       conn.release()
-      result.rows.forEach((element) => {
-        if (element.order_id == order_id) {
-          count++
-        }
-      })
-      return count
+      return result.rowCount
     } catch (error) {
       return 0
     }

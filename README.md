@@ -271,6 +271,7 @@ OrdersProduct
 (POST) /orderproducts
 (DELETE) /orderproducts
 (GET) /orderproducts/:order_id
+(GET) /orderproducts/
 ```
 
 ## Data Shapes

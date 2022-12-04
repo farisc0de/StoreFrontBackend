@@ -39,7 +39,7 @@ const showByCategory = async (req: Request, res: Response) => {
     const result = await store.showByCategory(req.params.id)
     res.json(result)
   } catch (err) {
-    res.status(400)
+    res.status(404)
     throw new Error(`${err}`)
   }
 }
@@ -54,7 +54,7 @@ const create = async (req: Request, res: Response) => {
     const result = await store.create(product)
     res.json(result)
   } catch (err) {
-    res.status(400)
+    res.status(401)
     throw new Error(`${err}`)
   }
 }

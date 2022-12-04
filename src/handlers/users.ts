@@ -21,10 +21,11 @@ const { TOKEN_SECRET } = process.env
 const index = async (req: Request, res: Response) => {
   try {
     const result = await store.index()
+    res.status(200)
     res.json(result)
   } catch (err) {
-    res.status(400)
-    throw new Error(`${err}`)
+    res.status(401)
+    res.json({ err })
   }
 }
 
@@ -92,7 +93,7 @@ const authenticate = async (req: Request, res: Response) => {
     res.json(token)
   } else {
     res.status(401)
-    res.json('Password is incorrect')
+    res.json({ message: 'Password is incorrect' })
   }
 }
 

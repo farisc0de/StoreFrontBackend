@@ -108,8 +108,13 @@ describe('Test products endpoints response', () => {
     expect(response.status).toBe(200)
   })
 
-  it('Test GET /products/:id endpoint', async () => {
-    const response = await request.get('/product/1')
+  it('Test GET /order/add/:order_id/:product_id endpoint', async () => {
+    const response = await request.get('/order/add/1/1').set('Authorization', 'bearer ' + token)
+    expect(response.status).toBe(200)
+  })
+
+  it('Test GET /order/quantity/:order_id endpoint', async () => {
+    const response = await request.get('/order/quantity/1').set('Authorization', 'bearer ' + token)
     expect(response.status).toBe(200)
   })
 })
