@@ -6,7 +6,7 @@ import { OrderProductStore } from '../models/OrderProducts'
 const orders_routes = (app: express.Application) => {
   app.get('/orders/:user_id/active', verifyAuthToken, showActive)
   app.get('/orders/:user_id/completed', verifyAuthToken, showCompleted)
-  app.get('/order/add/:order_id/:product_id', verifyAuthToken, addProductToOrder)
+  app.get('/order/add/:product_id/:order_id', verifyAuthToken, addProductToOrder)
   app.get('/order/quantity/:order_id', verifyAuthToken, getProductQuantity)
   app.post('/orders', verifyAuthToken, create)
 }

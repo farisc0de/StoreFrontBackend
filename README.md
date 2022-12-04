@@ -193,11 +193,11 @@ CREATE TABLE categories (
 ### Create orders products table
 
 ```sql
-CREATE TABLE ordersproduct (
+CREATE TABLE orderproducts (
     id serial,
     order_id int not null REFERENCES orders (id) ON UPDATE CASCADE ON DELETE CASCADE,
     product_id int not null REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT order_product_key PRIMARY KEY (order_id, product_id)
+    PRIMARY KEY (id)
 );
 ```
 
@@ -211,6 +211,28 @@ INSERT INTO users (firstName, lastName, username, password) VALUES (
     '$2a$12$9g5Z7JTppRhzVPZI3NzDAeF4CJD42rO/gz9CmBjuUmADFmN0X.dMe'
 );
 
+```
+
+### Create your first category
+
+```sql
+INSERT INTO categories (name) VALUES ('car');
+```
+
+### Create your first product
+
+```sql
+INSERT INTO products (name, price, category) VALUES (
+    'Camry 2022',
+    '250000',
+    1
+);
+```
+
+### Create your first order
+
+```sql
+INSERT INTO orders (user_id, status) VALUES (1, 'active');
 ```
 
 ## Environment variables
@@ -253,6 +275,8 @@ Orders
 ```
 (GET) /users/:user_id/completed
 (GET) /orders/:user_id/active
+(GET) /order/add/:product_id/:order_id
+(GET) /order/quantity/:order_id
 (POST) /orders
 ```
 
@@ -263,15 +287,6 @@ Products
 (GET) /products
 (GET) /product/:id
 (GET) /products/:id
-```
-
-OrdersProduct
-
-```
-(POST) /orderproducts
-(DELETE) /orderproducts
-(GET) /orderproducts/:order_id
-(GET) /orderproducts/
 ```
 
 ## Data Shapes
