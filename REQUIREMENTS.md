@@ -61,3 +61,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - id: number
 - name: string
+
+### OrderProducts
+
+- id: number
+- product_id: number
+- order_id: number

@@ -314,8 +314,6 @@ Products
 #### Orders
 
 - id: number
-- id of each product in the order: string
-- quantity of each product in the order: string
 - user_id: number
 - status of order (active or complete): string
 
@@ -323,6 +321,12 @@ Products
 
 - id: number
 - name: string
+
+### OrderProducts
+
+- id: number
+- product_id: number
+- order_id: number
 
 ## Copyright
 
