@@ -29,11 +29,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Database ER Digram
 
-![](https://o.top4top.io/p_2514u0a5m1.png)
+![](https://i.ibb.co/6FjRg84/image.png)
 
 ## Database Scheme
 
-![](https://o.top4top.io/p_2520urg641.png)
+![](https://i.ibb.co/LSC0Z3h/Untitled.png)
 
 #### Product
 
