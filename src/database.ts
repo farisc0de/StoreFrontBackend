@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const { DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME, DATABASE_NAME_TEST, ENV } =
+const { DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME, TEST_DATABASE_NAME, ENV } =
   process.env
 
 let client: Pool = new Pool()
@@ -11,7 +11,7 @@ let client: Pool = new Pool()
 if (ENV === 'test') {
   client = new Pool({
     host: DATABASE_HOST,
-    database: DATABASE_NAME_TEST,
+    database: TEST_DATABASE_NAME,
     user: DATABASE_USER,
     password: DATABASE_PASS
   })
